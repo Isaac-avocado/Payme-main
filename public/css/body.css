@@ -1,8 +1,15 @@
 .body-container {
     display: flex;
+    flex-direction: column;
     height: calc(100vh - 80px);
 }
 
+/* Ajuste para pantallas grandes */
+@media (min-width: 768px) {
+    .body-container {
+        flex-direction: row;
+    }
+}
 
 html, body {
     height: 100%;
@@ -50,8 +57,8 @@ html, body {
 }
 
 .nav-img {
-    width: 18px; /* Mismo tamaño que el icono */
-    height: 18px; /* Mismo tamaño que el icono */
+    width: 18px;
+    height: 18px;
 }
 
 .nav-text {
@@ -64,28 +71,28 @@ html, body {
 
 /* Parte central */
 .main-content {
-    flex: 1; /* Ocupa el mayor espacio disponible */
+    flex: 1;
     padding: 20px;
     background-color: #ffffff;
-    overflow-y: auto; /* Permite scroll si el contenido excede la altura */
+    overflow-y: auto;
 }
 
 /* Parte derecha */
 .right-panel {
     width: 300px;
     background-color: #f9f9f9;
-    border-left: 1px solid #ccc; /* Borde sutil */
+    border-left: 1px solid #ccc;
     padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 15px;
-    transition: width 0.3s ease; /* Transición para suavizar el colapso */
+    transition: width 0.3s ease;
 }
 
 /* Panel colapsado */
 .right-panel.collapsed {
-    width: 60px; /* Ancho reducido cuando está colapsado */
-    overflow: hidden; /* Oculta el contenido que no cabe */
+    width: 60px;
+    overflow: hidden;
 }
 
 /* Botón de colapso */
@@ -97,25 +104,18 @@ html, body {
     cursor: pointer;
 }
 
-/* Otros estilos */
-h1, h2 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: bold;
-}
-
 /* Contenedor principal */
 .content-center {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: space-between; /* Mantener espacios entre tarjetas */
+    justify-content: space-between;
     padding: 20px;
 }
 
 /* Tarjeta */
 .card {
-    flex: 1 1 calc(50% - 20px); /* Ajustar para un diseño responsivo en pares */
+    flex: 1 1 calc(50% - 20px);
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9;
@@ -212,7 +212,6 @@ h1, h2 {
     padding: 0 20px;
 }
 
-/* Etiqueta izquierda */
 .left-label {
     font-size: 14px;
     font-weight: bold;
@@ -224,7 +223,6 @@ h1, h2 {
     text-decoration: underline;
 }
 
-/* Etiqueta derecha */
 .right-label {
     font-size: 14px;
     font-weight: bold;
@@ -237,7 +235,7 @@ h1, h2 {
     padding: 0 20px;
 }
 
-
+/* Contenedor de las tarjetas */
 .credit-cards-container {
     display: flex;
     flex-wrap: wrap;
@@ -245,6 +243,7 @@ h1, h2 {
     justify-content: flex-start;
 }
 
+/* Tarjeta individual */
 .credit-card {
     display: flex;
     flex-direction: column;
@@ -254,18 +253,19 @@ h1, h2 {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 20px;
-    flex: 1 1 calc(33.33% - 20px); 
+    flex: 1 1 calc(33.33% - 20px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    min-width: 200px; 
-    max-width: calc(33.33% - 20px); 
+    min-width: 200px;
 }
 
+/* Icono de tarjeta */
 .card-icon {
     font-size: 2rem;
     color: #007bff;
     margin-right: 15px;
 }
 
+/* Botón de eliminar */
 .credit-card .delete-btn {
     align-self: flex-end;
     background: #e74c3c;
@@ -280,4 +280,41 @@ h1, h2 {
 
 .credit-card .delete-btn:hover {
     background: #c0392b;
+}
+
+/* Responsividad: Tarjetas */
+@media (max-width: 1024px) {
+    .credit-card {
+        flex: 1 1 calc(50% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .credit-card {
+        flex: 1 1 100%;
+    }
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    .navigation {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .right-panel {
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid #ccc;
+    }
+
+    .body-container {
+        flex-direction: column;
+    }
+}
+
+/* Margen adicional para etiquetas */
+.credit-card-section .top-labels {
+    margin-bottom: 15px;
 }

@@ -5,11 +5,11 @@ const router = express.Router();
 
 router.post('/addCard', verifyToken, (req, res) => {
     const { cardNumber, expireDate, cvv } = req.body;
-    const userId = req.userId; // Obtener el ID del usuario autenticado
+    const userId = req.userId; 
 
     // Convertir expireDate de MM/YY a YYYY-MM-DD
     const [month, year] = expireDate.split('/');
-    const formattedExpireDate = `20${year}-${month}-01`; // Asume que el día es 01 para la fecha de expiración
+    const formattedExpireDate = `20${year}-${month}-01`;
 
     console.log(`Received data: cardNumber=${cardNumber}, expireDate=${formattedExpireDate}, cvv=${cvv}, userId=${userId}`);
 
@@ -23,9 +23,8 @@ router.post('/addCard', verifyToken, (req, res) => {
     });
 });
 
-// Nueva ruta para obtener las tarjetas del usuario
 router.get('/getCards', verifyToken, (req, res) => {
-    const userId = req.userId; // Obtener el ID del usuario autenticado
+    const userId = req.userId; 
 
     const query = 'SELECT number, expire_date FROM cards WHERE user_id = ?';
     connection.execute(query, [userId], (err, results) => {

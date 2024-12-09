@@ -4,7 +4,7 @@ const verifyToken = require('./verifyToken');
 const router = express.Router();
 
 router.get('/', verifyToken, (req, res) => {
-    const userId = req.userId; // Obtener el ID del usuario autenticado
+    const userId = req.userId; 
 
     const query = `
         SELECT date, amount
@@ -20,10 +20,9 @@ router.get('/', verifyToken, (req, res) => {
         const labels = results.map(row => row.date);
         const values = results.map(row => row.amount);
 
-        // Calcular la suma total de ingresos
         const totalIncome = values.reduce((acc, currentValue) => acc + currentValue, 0);
 
-        res.json({ labels, values, totalIncome: parseFloat(totalIncome) }); // Asegurarse de que sea un número
+        res.json({ labels, values, totalIncome: parseFloat(totalIncome) }); 
     });
 });
 

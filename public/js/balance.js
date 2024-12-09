@@ -15,11 +15,15 @@ document.addEventListener('DOMContentLoaded', async function() {
         return await response.json();
     }
 
+    function formatCurrency(amount) {
+        return '$' + amount.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
     try {
         const data = await fetchBalance();
-        const balance = typeof data.balance === 'number' ? data.balance.toFixed(2) : '0.00'; // Manejar undefined o valores no numéricos
+        const balance = typeof data.balance === 'number' ? data.balance : 0.00; // Manejar undefined o valores no numéricos
 
-        document.getElementById('user-balance').textContent = `$${balance}`;
+        document.getElementById('user-balance').textContent = formatCurrency(balance);
     } catch (error) {
         console.error('Error fetching balance:', error);
     }

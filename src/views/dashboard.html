@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/public/css/header.css">
     <link rel="stylesheet" href="/public/css/body.css">
-    <link rel="stylesheet" href="/public/css/dashboard.css"> <!-- Asegúrate de tener este archivo CSS -->
+    <link rel="stylesheet" href="/public/css/dashboard.css"> 
     <link rel="stylesheet" href="/public/css/placeholder.css">
     <title>Dashboard</title>
-    <!-- Asegúrate de que la biblioteca Chart.js se carga antes de `charts.js` -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -32,7 +31,7 @@
             <div class="balance"> 
                 <span id="user-balance">$0.00</span> 
             </div>
-            <button class="logout-btn" onclick="logout()">Logout</button> <!-- Botón de logout añadido -->
+            <button class="logout-btn" onclick="logout()">Logout</button> <!-- Botón de logout-->
         </div>
     </header>
     <div class="body-container">
@@ -82,7 +81,7 @@
                                     <span class="btn-label">Income</span>
                                 </button>
                             </div>
-                            <canvas id="incomeChart"></canvas> <!-- Aquí va la gráfica de ingresos -->
+                            <canvas id="incomeChart"></canvas> 
                         </div>                        
                     </div>
                     <!-- Tarjeta de gastos -->
@@ -97,7 +96,7 @@
                         <div class="card-content">
                             <div class="amount-section">
                                 <div>
-                                    <span class="amount total-expenses">$0.00</span> <!-- Aquí se mostrará la suma total de gastos -->
+                                    <span class="amount total-expenses">$0.00</span> 
                                     <p class="label">Last expenses</p>
                                 </div>
                                 <button class="expense-btn">
@@ -105,7 +104,7 @@
                                     <span class="btn-label">Expenses</span>
                                 </button>
                             </div>
-                            <canvas id="expenseChart"></canvas> <!-- Aquí va la gráfica de gastos -->
+                            <canvas id="expenseChart"></canvas> 
                         </div>
                     </div>
                 </div>
@@ -127,7 +126,6 @@
                                 <p class="card-label">Card number</p>
                             </div>
                         </div>
-                        <!-- Agrega más tarjetas aquí según sea necesario -->
                     </div>
                 </div>
             </div>

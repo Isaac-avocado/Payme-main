@@ -7,7 +7,7 @@ document.getElementById('card-form').addEventListener('submit', async function (
 
     let errors = [];
 
-    // Limpiar los mensajes de error previos
+    // debug
     const errorMessages = document.querySelectorAll('.error-message');
     errorMessages.forEach(error => error.textContent = "");
 
@@ -29,9 +29,8 @@ document.getElementById('card-form').addEventListener('submit', async function (
         errors.push("CVV inválido");
     }
 
-    // Si hay errores, mostrar los mensajes de error
     if (errors.length > 0) {
-        return; // Evitar enviar el formulario
+        return; 
     } else {
         try {
             const token = localStorage.getItem('token'); // Obtener el token JWT del localStorage
@@ -40,7 +39,7 @@ document.getElementById('card-form').addEventListener('submit', async function (
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
-                    'Authorization': token // Incluir el token en el encabezado de la solicitud
+                    'Authorization': token 
                 },
                 body: JSON.stringify({ cardNumber, expireDate, cvv }),
                 credentials: 'include'
@@ -49,7 +48,6 @@ document.getElementById('card-form').addEventListener('submit', async function (
             const result = await response.json();
             if (response.ok) {
                 alert(result.message);
-                // Aquí puedes agregar lógica adicional, como actualizar la UI para mostrar la nueva tarjeta
             } else {
                 alert(result.message);
             }

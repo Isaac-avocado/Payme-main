@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function transferFunds(url, data) {
         try {
-            const token = localStorage.getItem('token'); // Asegúrate de que el token esté en localStorage
+            const token = localStorage.getItem('token'); 
             if (!token) {
                 throw new Error('Token not found');
             }
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': token, // Envía el token en el encabezado Authorization
+                    'Authorization': token, 
                 },
                 body: JSON.stringify(data),
             });
@@ -125,23 +125,23 @@ document.addEventListener("DOMContentLoaded", function () {
     // Validar números de tarjeta
     document.getElementById('end-card').addEventListener('input', function (e) {
         let value = e.target.value;
-        value = value.replace(/[^0-9]/g, ''); // Remover caracteres no numéricos
-        e.target.value = value; // Actualizar el valor del input
+        value = value.replace(/[^0-9]/g, ''); 
+        e.target.value = value; 
     });
 
     document.getElementById('own-card').addEventListener('input', function (e) {
         let value = e.target.value;
-        value = value.replace(/[^0-9]/g, ''); // Remover caracteres no numéricos
+        value = value.replace(/[^0-9]/g, ''); 
         if (value.length > 16) {
-            value = value.slice(0, 16); // Limitar a 16 dígitos
+            value = value.slice(0, 16); 
         }
-        e.target.value = value; // Actualizar el valor del input
+        e.target.value = value; 
     });
 
     // Validar solo números en el campo de monto
     document.getElementById('amount').addEventListener('input', function (e) {
         let value = e.target.value;
-        value = value.replace(/[^0-9]/g, ''); // Remover caracteres no numéricos
-        e.target.value = value; // Actualizar el valor del input
+        value = value.replace(/[^0-9]/g, ''); 
+        e.target.value = value;
     });
 });

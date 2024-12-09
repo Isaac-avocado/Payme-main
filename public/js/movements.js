@@ -53,7 +53,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                         return;
                     }
 
-                    // Determinar el símbolo basado en el tipo de transacción
                     const transactionIcon = transaction.type === 'income' ? '➕' : '➖';
 
                     transactionElement.innerHTML = `

@@ -1,12 +1,12 @@
-require('dotenv').config(); // Cargar las variables de entorno desde el archivo .env
+require('dotenv').config(); 
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const connection = require('./dbConnect');
 const router = express.Router();
 
-const JWT_SECRET = process.env.JWT_KEY; // Usar la clave secreta desde el archivo .env
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN; // Usar la duración desde el archivo .env
+const JWT_SECRET = process.env.JWT_KEY; 
+const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN; 
 
 router.post('/login', (req, res) => {
     const { email, password } = req.body;

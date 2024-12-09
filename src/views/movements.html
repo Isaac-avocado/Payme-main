@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/body.css">
+    <link rel="stylesheet" href="/public/css/movents.css">
+    <link rel="stylesheet" href="/public/css/placeholder.css">
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+
+    <title>Movements</title>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <div class="logo">
+                <span class="logo-text">PM</span>
+            </div>
+            <div class="me">
+                ME!
+            </div>
+        </div>
+        <div class="section-text">
+            <h1>Movements</h1>
+        </div>
+        <div class="icons">
+            <div class="profile">
+                <img src="/public/imgs/profile_11541176.png" alt="Foto de perfil" class="profile-img">
+                <label class="user" for="">Name</label>
+            </div>
+            <div class="balance">
+                <!--<span id="user-balance">$0.00</span>  Label para el dinero disponible -->
+            </div>
+            <button class="logout-btn" onclick="logout()">Logout</button> <!-- Botón de logout añadido -->
+        </div>
+    </header>
+    <div class="body-container">
+        <aside class="navigation"> 
+            <h2 class="nav-label">Navigation</h2> 
+            <button class="nav-btn" onclick="navigateTo('/src/views/dashboard.html')"> 
+                <img src="/public/imgs/clock-two_7546832.svg" alt="Dashboard Icon" class="nav-img"> 
+                <span class="nav-text">DASHBOARD</span> 
+            </button> 
+            <button class="nav-btn" onclick="navigateTo('/src/views/movements.html')"> 
+                <img src="/public/imgs/time_16422146.png" alt="Movements Icon" class="nav-img"> 
+                <span class="nav-text">MOVEMENTS</span> 
+            </button>
+            <button class="nav-btn" onclick="navigateTo('/src/views/cards.html')"> 
+                <img src="/public/imgs/business_16093147.png" alt="Cards Icon" class="nav-img">
+                <span class="nav-text">CARDS</span>
+            </button> 
+            <button class="nav-btn" onclick="navigateTo('/src/views/payments.html')"> 
+                <img src="/public/imgs/pay_9748078.png" alt="Payments Icon" class="nav-img">
+                <span class="nav-text">PAYMENTS</span> 
+            </button> 
+        </aside>
+        <div class="content-container">
+            <!-- Parte superior -->
+            <div class="top-section">
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Search transactions...">
+                    <button class="search-btn">🔍</button>
+                </div>
+                <div class="date-info">
+                    <input type="date" id="date-picker" class="date-picker" value="2024-12-01">
+                    <button class="all-movements-btn">All Movements</button>
+                </div>
+            </div>
+
+            <!-- Transacciones -->
+            <div class="transactions" id="transactions-container">
+                <!-- Placeholder de transacciones -->
+                <div class="placeholder" id="transactions-placeholder">
+                    <img src="/public/imgs/undraw_online_transactions_-02-ka.svg" alt="No transactions available">
+                    <p class="no-transactions-text">No transactions found.</p>
+                </div>
+
+                <!-- Transacción Pagada (Ejemplo Oculto) -->
+                <div class="transaction paid" style="display: none;">
+                    <span class="transaction-icon">✅</span>
+                    <div class="transaction-details">
+                        <p class="small-label">From</p>
+                        <p class="large-label">OXXO</p>
+                    </div>
+                    <div class="status">
+                        <div class="status-circle green"></div>
+                        <span>Paid</span>
+                    </div>
+                    <div class="invoice-info">
+                        <p class="large-label">#123456</p>
+                        <p class="small-label">Factura</p>
+                    </div>
+                    <div class="amount-info">
+                        <p class="large-label">$1,200.00</p>
+                        <p class="small-label">01/12/2024, 14:30</p>
+                    </div>
+                </div>
+                <!-- Agrega más transacciones aquí según sea necesario -->
+            </div>
+        </div>
+    </div>
+    <script src="/public/js/btns.js"></script>
+    <script src="/public/js/userName.js"></script>
+    <script src="/public/js/logout.js"></script>
+    <script src="/public/js/movements.js"></script>
+    <!-- <script src="/public/js/transactions.js"></script> Añadir esta línea para cargar el nuevo script -->
+</body>
+</html>

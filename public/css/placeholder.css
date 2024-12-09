@@ -1,0 +1,48 @@
+.credit-cards-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; 
+    position: relative; 
+}
+
+.placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute; 
+}
+
+.placeholder img {
+    width: 300px;
+    height: auto;
+    margin-bottom: 10px; 
+}
+
+.no-cards-text {
+    background: linear-gradient(to right, #FFAB2B, #F08418);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px; 
+}
+
+.transactions {
+    position: relative;
+    min-height: 300px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-transactions-text {
+    background: linear-gradient(to right, #FFAB2B, #F08418);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}

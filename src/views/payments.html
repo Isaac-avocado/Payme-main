@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/body.css">
+    <link rel="stylesheet" href="/public/css/payments.css">
+    <link rel="stylesheet" href="/public/css/placeholder.css">
+    <title>Document</title>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <div class="logo">
+                <span class="logo-text">PM</span>
+            </div>
+            <div class="me">
+                ME!
+            </div>
+        </div>
+        <div class="section-text">
+            <h1>Payments</h1>
+        </div>
+        <div class="icons">
+            <div class="profile">
+                <img src="/public/imgs/profile_11541176.png" alt="Foto de perfil" class="profile-img">
+                <label class="user" for="">Name</label>
+            </div>
+            <button class="logout-btn" onclick="logout()">Logout</button> <!-- Botón de logout añadido -->
+        </div>
+    </header>
+    <div class="body-container">
+        <aside class="navigation"> 
+            <h2 class="nav-label">Navigation</h2> 
+            <button class="nav-btn" onclick="navigateTo('/src/views/dashboard.html')"> 
+                <img src="/public/imgs/clock-two_7546832.svg" alt="Dashboard Icon" class="nav-img"> 
+                <span class="nav-text">DASHBOARD</span> 
+            </button> 
+            <button class="nav-btn" onclick="navigateTo('/src/views/movements.html')"> 
+                <img src="/public/imgs/time_16422146.png" alt="Movements Icon" class="nav-img"> 
+                <span class="nav-text">MOVEMENTS</span> 
+            </button>
+            <button class="nav-btn" onclick="navigateTo('/src/views/cards.html')"> 
+                <img src="/public/imgs/business_16093147.png" alt="Cards Icon" class="nav-img">
+                <span class="nav-text">CARDS</span>
+            </button> 
+            <button class="nav-btn" onclick="navigateTo('/src/views/payments.html')"> 
+                <img src="/public/imgs/pay_9748078.png" alt="Payments Icon" class="nav-img">
+                <span class="nav-text">PAYMENTS</span> 
+            </button> 
+        </aside>
+        <div class="content-container">
+            <div class="form-container">
+                <div class="form-card">
+                    <h2>Transference</h2>
+                    <div class="separator"></div>
+        
+                    <form id="transfer-form">
+                        <div class="input-group">
+                            <label for="payment-method">Select method of transference</label>
+                            <select id="payment-method" name="payment-method">
+                                <option value="card">Using card</option>
+                                <option value="user">Between users</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group card-input">
+                            <label for="own-card">Own Card</label>
+                            <input type="text" id="own-card" name="own-card" placeholder="Own Card" />
+                            <div class="error-message"></div>
+                        </div>   
+
+                        <div class="input-group card-input">
+                            <label for="card-number">End card</label>
+                            <input type="text" id="end-card" name="end-card" maxlength="16" placeholder="Card number" />
+                            <div class="error-message"></div>
+                        </div>
+        
+                        <div class="input-group user-input">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="User email" />
+                            <div class="error-message"></div>
+                        </div>
+        
+                        <div class="input-group">
+                            <label for="amount">Amount</label>
+                            <input type="number" id="amount" name="amount" placeholder="Type amount" />
+                            <div class="error-message"></div>
+                        </div>
+        
+                        <div class="input-group">
+                            <label for="description">Description (opcional)</label>
+                            <textarea id="description" name="description" placeholder="Transference description"></textarea>
+                        </div>
+                        <button type="submit" class="btn">Transfer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>   
+    <script src="/public/js/payments.js"></script>        
+    <script src="/public/js/btns.js"></script>
+    <script src="/public/js/userName.js"></script>
+    <script src="/public/js/logout.js"></script>
+</body>
+</html>

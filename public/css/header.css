@@ -1,0 +1,111 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #F9F9FB;
+}
+
+.header {
+    width: 100%;
+    height: 10%; /* Altura fija para la cabecera */
+    background-color: #ffffff;
+    border-bottom: 1px solid #ccc; /* Línea sutil debajo */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+    z-index: 10; /* Para que siempre esté encima del contenido */
+}
+
+/*Left*/
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 200px;
+    height: 100%;
+    border-right: 1px solid #ccc;
+}
+.logo {
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    border-radius: 12px;
+    background: linear-gradient(to right, #FFAB2B, #F08418);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: white; 
+}
+.me {
+    font-size: 18px; 
+    font-weight: bold;
+    background: linear-gradient(to right, #FFAB2B, #F08418); 
+    -webkit-background-clip: text; 
+    color: transparent; 
+}
+
+/*Middle*/
+.section-text h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    text-align: left;
+    color: #333;
+}
+.section-text {
+    display: flex;
+    justify-content: flex-start;
+    width: 200px;
+}
+
+/*Right*/
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.icon-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Estilo para el botón de logout */
+.logout-btn {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #f44336;
+    color: white;
+}
+.logout-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Estilo para el label de balance */
+.balance {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}

@@ -1,0 +1,43 @@
+/* Contenedor de gráficas */
+.charts-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px; /* Espacio entre las tarjetas */
+}
+
+.chart-container {
+    flex: 1 1 45%; /* Ajuste para que ocupen el 45% del contenedor */
+}
+
+.chart-container canvas {
+    width: 100% !important;
+    height: 300px !important; /* Ajusta la altura según sea necesario */
+}
+
+.content-center {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.main-content {
+    width: 80%; /* Ajusta según sea necesario */
+    margin: 0 auto;
+}
+
+.card {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.amount-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

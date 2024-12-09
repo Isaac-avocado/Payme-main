@@ -1,0 +1,158 @@
+/* Contenedor principal */
+.body-container {
+    display: flex;
+    height: 100%;
+}
+
+/* Contenedor del contenido principal */
+.content-container {
+    flex: 1;
+    padding: 2%;
+    background-color: #ffffff;
+    overflow-y: auto;
+}
+
+/* Parte superior */
+.top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+}
+
+.search-btn {
+    padding: 8px 12px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.date-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.calendar-icon {
+    font-size: 1.2rem;
+}
+
+.all-movements-btn {
+    padding: 8px 12px;
+    background: none;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    color: #007bff;
+    cursor: pointer;
+}
+
+/* Transacciones */
+.transactions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.transaction {
+    display: flex;
+    align-items: center;
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.transaction-icon {
+    font-size: 2rem;
+    margin-right: 15px;
+}
+
+.transaction-details {
+    flex: 1;
+}
+
+.small-label {
+    font-size: 12px;
+    color: #888;
+}
+
+.large-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.status-circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.status-circle.green {
+    background: green;
+}
+
+.status-circle.red {
+    background: red;
+}
+
+.status-circle.yellow {
+    background: yellow;
+}
+
+.invoice-info,
+.amount-info {
+    text-align: right;
+    margin-left: 20px;
+}
+
+
+.date-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.calendar-icon {
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.date-picker {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+
+.all-movements-btn {
+    padding: 8px 12px;
+    background: none;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    color: #007bff;
+    cursor: pointer;
+}

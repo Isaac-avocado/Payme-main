@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/body.css">
+    <link rel="stylesheet" href="/public/css/dashboard.css"> <!-- Asegúrate de tener este archivo CSS -->
+    <link rel="stylesheet" href="/public/css/placeholder.css">
+    <title>Dashboard</title>
+    <!-- Asegúrate de que la biblioteca Chart.js se carga antes de `charts.js` -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <div class="logo">
+                <span class="logo-text">PM</span>
+            </div>
+            <div class="me">
+                ME!
+            </div>
+        </div>
+        <div class="section-text">
+            <h1>Dashboard</h1>
+        </div>
+        <div class="icons">
+            <div class="profile">
+                <img src="/public/imgs/profile_11541176.png" alt="Foto de perfil" class="profile-img">
+                <label class="user" for="">Name</label>
+            </div>
+            <div class="balance"> 
+                <span id="user-balance">$0.00</span> 
+            </div>
+            <button class="logout-btn" onclick="logout()">Logout</button> <!-- Botón de logout añadido -->
+        </div>
+    </header>
+    <div class="body-container">
+        <!-- Barra de navegación lateral izquierda -->
+        <aside class="navigation">
+            <h2 class="nav-label">Navigation</h2>
+            <button class="nav-btn" onclick="navigateTo('/src/views/dashboard.html')">
+                <img src="/public/imgs/clock-two_7546832.svg" alt="Dashboard Icon" class="nav-img">
+                <span class="nav-text">DASHBOARD</span>
+            </button>
+            <button class="nav-btn" onclick="navigateTo('/src/views/movements.html')">
+                <img src="/public/imgs/time_16422146.png" alt="Movements Icon" class="nav-img">
+                <span class="nav-text">MOVEMENTS</span>
+            </button>
+            <button class="nav-btn" onclick="navigateTo('/src/views/cards.html')">
+                <img src="/public/imgs/business_16093147.png" alt="Cards Icon" class="nav-img">
+                <span class="nav-text">CARDS</span>
+            </button>
+            <button class="nav-btn" onclick="navigateTo('/src/views/payments.html')">
+                <img src="/public/imgs/pay_9748078.png" alt="Payments Icon" class="nav-img">
+                <span class="nav-text">PAYMENTS</span>
+            </button>
+        </aside>
+        <!-- Parte central -->
+        <main class="main-content">
+            <div class="top-labels">
+                <span class="right-label">Founds overview</span>
+                <a href="#" class="left-label">ALL REPORTS</a>
+            </div>
+            <div class="content-center">
+                <div class="charts-row"> <!-- Contenedor de gráficas -->
+                    <!-- Tarjeta de Ingresos -->
+                    <div class="card"> 
+                        <div class="card-header"> 
+                            <div class="period-selector"> 
+                                <!--<span class="period-option active" data-period="month">Monthly</span> 
+                                <span class="period-option" data-period="week">Weekly</span> 
+                                <span class="period-option" data-period="day">Daily</span> -->
+                            </div> 
+                        </div> 
+                        <div class="card-content">
+                            <div class="amount-section">
+                                <div> <span class="amount total-income">$0.00</span>
+                                    <p class="label">Last income</p> </div>
+                                <button class="expense-btn">
+                                    <div class="circle"></div>
+                                    <span class="btn-label">Income</span>
+                                </button>
+                            </div>
+                            <canvas id="incomeChart"></canvas> <!-- Aquí va la gráfica de ingresos -->
+                        </div>                        
+                    </div>
+                    <!-- Tarjeta de gastos -->
+                    <div class="card"> 
+                        <div class="card-header"> 
+                            <div class="period-selector"> 
+                                <!--<span class="period-option active" data-period="month">Monthly</span> 
+                                <span class="period-option" data-period="week">Weekly</span> 
+                                <span class="period-option" data-period="day">Daily</span> -->
+                            </div> 
+                        </div> 
+                        <div class="card-content">
+                            <div class="amount-section">
+                                <div>
+                                    <span class="amount total-expenses">$0.00</span> <!-- Aquí se mostrará la suma total de gastos -->
+                                    <p class="label">Last expenses</p>
+                                </div>
+                                <button class="expense-btn">
+                                    <div class="circle"></div>
+                                    <span class="btn-label">Expenses</span>
+                                </button>
+                            </div>
+                            <canvas id="expenseChart"></canvas> <!-- Aquí va la gráfica de gastos -->
+                        </div>
+                    </div>
+                </div>
+                <div class="top-labels">
+                    <span class="right-label">Last cards</span>
+                    <a href="#" class="left-label">NEW CARD</a>
+                </div>
+                <div class="credit-card-section">
+                    <div class="credit-cards-container" id="credit-cards-container">
+                        <div class="placeholder" id="card-placeholder">
+                            <img src="/public/imgs/undraw_credit_card_re_blml.svg" alt="No cards available">
+                            <p class="no-cards-text">No credit cards have been withdrawn</p>
+                        </div>
+                        <!-- Tarjetas existentes (inicialmente ocultas) -->
+                        <div class="credit-card" style="display: none;">
+                            <div class="card-icon">💳</div>
+                            <div class="card-details">
+                                <span class="card-number">  ** 1234</span>
+                                <p class="card-label">Card number</p>
+                            </div>
+                        </div>
+                        <!-- Agrega más tarjetas aquí según sea necesario -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/public/js/periodSelector.js"></script>
+    <script src="/public/js/btns.js"></script>
+    <script src="/public/js/userName.js"></script>
+    <script src="/public/js/charts.js"></script>
+    <script src="/public/js/placeholder.js"></script>
+    <script src="/public/js/logout.js"></script>
+    <script src="/public/js/balance.js"></script>
+</body>
+</html>

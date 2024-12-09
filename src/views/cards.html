@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/body.css">
+    <link rel="stylesheet" href="/public/css/cards.css">
+    <title>Document</title>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <div class="logo">
+                <span class="logo-text">PM</span>
+            </div>
+            <div class="me">
+                ME!
+            </div>
+        </div>
+        <div class="section-text">
+            <h1>Cards</h1>
+        </div>
+        <div class="icons">
+            <div class="profile">
+                <img src="/public/imgs/profile_11541176.png" alt="Foto de perfil" class="profile-img">
+                <label class="user" for="">Name</label>
+            </div>
+            <div class="balance">
+                <!--<span id="user-balance">$0.00</span>  Label para el dinero disponible -->
+            </div>
+            <button class="logout-btn" onclick="logout()">Logout</button> <!-- Botón de logout añadido -->
+        </div>
+    </header>
+    <div class="body-container">
+        <aside class="navigation"> 
+            <h2 class="nav-label">Navigation</h2> 
+            <button class="nav-btn" onclick="navigateTo('/src/views/dashboard.html')"> 
+                <img src="/public/imgs/clock-two_7546832.svg" alt="Dashboard Icon" class="nav-img"> 
+                <span class="nav-text">DASHBOARD</span> 
+            </button> 
+            <button class="nav-btn" onclick="navigateTo('/src/views/movements.html')"> 
+                <img src="/public/imgs/time_16422146.png" alt="Movements Icon" class="nav-img"> 
+                <span class="nav-text">MOVEMENTS</span> 
+            </button>
+            <button class="nav-btn" onclick="navigateTo('/src/views/cards.html')"> 
+                <img src="/public/imgs/business_16093147.png" alt="Cards Icon" class="nav-img">
+                <span class="nav-text">CARDS</span>
+            </button> 
+            <button class="nav-btn" onclick="navigateTo('/src/views/payments.html')"> 
+                <img src="/public/imgs/pay_9748078.png" alt="Payments Icon" class="nav-img">
+                <span class="nav-text">PAYMENTS</span> 
+            </button> 
+        </aside>
+        <div class="content-container">
+            <div class="form-container">
+                <div class="form-card">
+                    <h2>Add new card</h2>
+                    <div class="separator"></div>
+
+                    <form id="card-form">
+                        <div class="input-group">
+                            <label for="card-number">Card number</label>
+                            <input type="text" id="card-number" name="card-number" maxlength="16" placeholder="Número de Tarjeta" />
+                            <div class="error-message"></div>
+                        </div>
+                        <div class="input-group">
+                            <label for="expire-date">Expiration date (MM/YY)</label>
+                            <input type="text" id="expire-date" name="expire-date" maxlength="5" placeholder="Fecha de Expiración (MM/YY)" />
+                            <div class="error-message"></div>
+                        </div>
+                        <div class="input-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" name="cvv" maxlength="3" placeholder="CVV" />
+                            <div class="error-message"></div>
+                        </div>
+                        <button type="submit" class="btn">Add card</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/public/js/cards.js"></script>
+    <script src="/public/js/btns.js"></script>
+    <script src="/public/js/userName.js"></script>
+    <script src="/public/js/logout.js"></script>
+</body>
+</html>

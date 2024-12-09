@@ -36,4 +36,24 @@ router.get('/getCards', verifyToken, (req, res) => {
     });
 });
 
+router.delete('/:id', verifyToken, (req, res) => {
+    const { id } = req.params;
+    const userId = req.userId; 
+
+    const query = 'DELETE FROM cards WHERE id = ? AND user_id = ?';
+    connection.execute(query, [id, userId], (err, results) => {
+        if (err) {
+            console.error('Error deleting card:', err);
+            return res.status(500).json({ message: 'Error deleting card' });
+        }
+
+        if (results.affectedRows === 0) {
+            return res.status(404).json({ message: 'Card not found or not authorized' });
+        }
+
+        res.json({ message: 'Card deleted successfully' });
+    });
+});
+
+
 module.exports = router;

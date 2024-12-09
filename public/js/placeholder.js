@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', async function () {
     const creditCardsContainer = document.getElementById('credit-cards-container');
     const placeholder = document.getElementById('card-placeholder');
 
@@ -14,12 +14,37 @@ document.addEventListener('DOMContentLoaded', async function() {
             return await response.json();
         }
 
-        // Función para formatear la fecha en MM/YY
+        // Funci贸n para formatear la fecha en MM/YY
         function formatDate(dateString) {
             const date = new Date(dateString);
-            const month = ("0" + (date.getUTCMonth() + 1)).slice(-2); // Obtener el mes con dos dígitos
-            const year = date.getUTCFullYear().toString().slice(-2); // Obtener los últimos dos dígitos del año
+            const month = ("0" + (date.getUTCMonth() + 1)).slice(-2); // Obtener el mes con dos d铆gitos
+            const year = date.getUTCFullYear().toString().slice(-2); // Obtener los 煤ltimos dos d铆gitos del a帽o
             return `${month}/${year}`;
+        }
+
+        // Funci贸n para eliminar una tarjeta
+        async function deleteCard(cardId, cardElement) {
+            const token = localStorage.getItem('token');
+            try {
+                const response = await fetch(`http://localhost:3000/api/cards/${cardId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': token,
+                        'Content-Type': 'application/json'
+                    },
+                });
+
+                if (response.ok) {
+                    cardElement.remove(); // Eliminar la tarjeta del DOM
+                    if (creditCardsContainer.children.length === 0) {
+                        placeholder.style.display = 'flex'; // Mostrar placeholder si no hay tarjetas
+                    }
+                } else {
+                    console.error('Error al eliminar la tarjeta:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error en la solicitud de eliminaci贸n:', error);
+            }
         }
 
         try {
@@ -29,14 +54,20 @@ document.addEventListener('DOMContentLoaded', async function() {
                 cards.forEach(card => {
                     const cardElement = document.createElement('div');
                     cardElement.className = 'credit-card';
+                    cardElement.dataset.id = card.id; // Asignar ID de la tarjeta
                     cardElement.innerHTML = `
                         <div class="card-icon">💳</div>
                         <div class="card-details">
                             <span class="card-number">**** **** **** ${card.number.slice(-4)}</span>
                             <p class="card-label">Expires: ${formatDate(card.expire_date)}</p>
                         </div>
+                        <button class="delete-btn">Delete</button>
                     `;
                     creditCardsContainer.appendChild(cardElement);
+
+                    // Agregar evento al boton de eliminar
+                    const deleteBtn = cardElement.querySelector('.delete-btn');
+                    deleteBtn.addEventListener('click', () => deleteCard(card.id, cardElement));
                 });
             } else {
                 placeholder.style.display = 'flex';

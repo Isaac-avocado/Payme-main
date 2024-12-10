@@ -1,58 +1,62 @@
 document.addEventListener('DOMContentLoaded', async function() {
+    const datePicker = document.getElementById('date-picker');
+    const allMovementsBtn = document.querySelector('.all-movements-btn');
     const transactionsContainer = document.getElementById('transactions-container');
     const transactionsPlaceholder = document.getElementById('transactions-placeholder');
 
-    if (transactionsContainer && transactionsPlaceholder) {
-        console.log('Containers found, fetching transactions...');
+    let userId; // Variable para almacenar el userId
 
-        // Función para obtener los datos de la API
-        async function fetchData(apiEndpoint) {
-            const token = localStorage.getItem('token'); // Obtener el token JWT del localStorage
-            console.log('Fetching data with token:', token);
+    // Obtener el userId del token JWT
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error('Token not found');
+        }
+        const decodedToken = jwt_decode(token);
+        userId = decodedToken.userId; // Decodificar el userId
+    } catch (error) {
+        console.error('Error decoding token:', error);
+        return; // Salir si no se puede obtener el userId
+    }
 
-            const response = await fetch(apiEndpoint, {
-                headers: {
-                    'Authorization': token
-                },
-                credentials: 'include'
-            });
+    // Función para formatear la fecha
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit', year: 'numeric' }) +
+            ', ' +
+            date.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+    }
 
-            console.log('API response status:', response.status);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return await response.json();
+    async function fetchTransactionsByDate(date) {
+        const token = localStorage.getItem('token');
+        const apiEndpoint = date 
+            ? `http://localhost:3000/api/transactions/getUserTransactionsByDate?date=${date}` 
+            : 'http://localhost:3000/api/transactions/getUserTransactions';
+
+        const response = await fetch(apiEndpoint, {
+            headers: { 'Authorization': token },
+            credentials: 'include'
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        // Función para formatear la fecha
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            return date.toLocaleDateString() + ', ' + date.toLocaleTimeString();
-        }
+        return await response.json();
+    }
 
+    async function renderTransactions(date = null) {
         try {
-            const token = localStorage.getItem('token');
-            const decodedToken = jwt_decode(token);
-            const userId = decodedToken.userId;
-            console.log('Decoded userId from token:', userId);
-
-            const transactions = await fetchData('http://localhost:3000/api/transactions/getUserTransactions');
-            console.log('Transactions fetched:', transactions);
+            const transactions = await fetchTransactionsByDate(date);
+            transactionsContainer.innerHTML = ''; // Limpiar contenedor
 
             if (transactions.length > 0) {
                 transactionsPlaceholder.style.display = 'none';
                 transactions.forEach(transaction => {
                     const transactionElement = document.createElement('div');
                     transactionElement.className = 'transaction';
-                    console.log('Appending transaction:', transaction);
 
-                    // Asegurarse de que transaction.amount es un número
-                    const amount = parseFloat(transaction.amount);
-                    if (isNaN(amount)) {
-                        console.error('Transaction amount is not a number:', transaction.amount);
-                        return;
-                    }
-
+                    const amount = parseFloat(transaction.amount) || 0;
                     const transactionIcon = transaction.type === 'income' ? '➕' : '➖';
 
                     transactionElement.innerHTML = `
@@ -77,13 +81,22 @@ document.addEventListener('DOMContentLoaded', async function() {
                     transactionsContainer.appendChild(transactionElement);
                 });
             } else {
-                console.log('No transactions found.');
                 transactionsPlaceholder.style.display = 'flex';
             }
         } catch (error) {
             console.error('Error fetching transactions:', error);
         }
-    } else {
-        console.error('Elemento transactionsContainer o transactionsPlaceholder no encontrado');
     }
+
+    datePicker.addEventListener('change', () => {
+        const selectedDate = datePicker.value;
+        renderTransactions(selectedDate);
+    });
+
+    allMovementsBtn.addEventListener('click', () => {
+        renderTransactions(null);
+    });
+
+    // Render all transactions on page load
+    renderTransactions();
 });

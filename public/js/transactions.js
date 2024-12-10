@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             return await response.json();
         }
 
-        // Función para formatear la fecha
         function formatDate(dateString) {
             const date = new Date(dateString);
             return date.toLocaleDateString() + ', ' + date.toLocaleTimeString();

@@ -21,7 +21,12 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     try {
         const data = await fetchBalance();
-        const balance = typeof data.balance === 'number' ? data.balance : 0.00; // Manejar undefined o valores no numéricos
+        let balance = typeof data.balance === 'number' ? data.balance : 0.00; // Manejar undefined o valores no numéricos
+
+        // Asegurarse de que no haya números negativos
+        if (balance < 0) {
+            balance = 0.00;
+        }
 
         document.getElementById('user-balance').textContent = formatCurrency(balance);
     } catch (error) {

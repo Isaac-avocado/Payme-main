@@ -26,6 +26,13 @@ router.post('/transferBetweenUsers', verifyToken, (req, res) => {
 
             const recipientId = results[0].id;
 
+            // Validar que el destinatario no sea el mismo usuario
+            if (recipientId === userId) {
+                return connection.rollback(() => {
+                    res.status(400).json({ message: 'You cannot transfer to yourself' });
+                });
+            }
+
             // Actualizar balance del remitente
             const deductBalanceQuery = `
                 UPDATE users SET user_balance = user_balance - ?
@@ -107,12 +114,19 @@ router.post('/transferBetweenCards', verifyToken, (req, res) => {
             return res.status(500).json({ message: 'Error starting transaction' });
         }
 
+        // Validar que las tarjetas no sean iguales
+        if (ownCard === endCard) {
+            return connection.rollback(() => {
+                res.status(400).json({ message: 'Cannot transfer to the same card' });
+            });
+        }
+
         // Verificar fondos en la tarjeta propia
         const getOwnCardBalanceQuery = `
             SELECT card_balance FROM cards WHERE user_id = ? AND number = ?
         `;
         connection.execute(getOwnCardBalanceQuery, [userId, ownCard], (err, results) => {
-            if (err || results.length === 0 || results[0].balance < amount) {
+            if (err || results.length === 0 || results[0].card_balance < amount) {
                 console.error('Fondos insuficientes o tarjeta no encontrada:', err);
                 return connection.rollback(() => {
                     res.status(400).json({ message: 'Insufficient funds or card not found' });

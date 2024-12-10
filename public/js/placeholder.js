@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     console.error('Error al eliminar la tarjeta:', response.statusText);
                 }
             } catch (error) {
-                console.error('Error en la solicitud de eliminaci贸n:', error);
+                console.error('Error en la solicitud de eliminacion:', error);
             }
         }
 

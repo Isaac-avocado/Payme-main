@@ -48,6 +48,7 @@ document.getElementById('card-form').addEventListener('submit', async function (
             const result = await response.json();
             if (response.ok) {
                 alert(result.message);
+                
             } else {
                 alert(result.message);
             }
@@ -56,3 +57,67 @@ document.getElementById('card-form').addEventListener('submit', async function (
         }
     }
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const cardNumberInput = document.getElementById('card-number');
+    const expireDateInput = document.getElementById('expire-date');
+    const cvvInput = document.getElementById('cvv');
+    const cardForm = document.getElementById('card-form');
+
+    // Permitir solo números en los campos
+    function allowOnlyNumbers(event) {
+        const key = event.key;
+        if (!/^\d$/.test(key) && key !== 'Backspace' && key !== 'Tab') {
+            event.preventDefault();
+        }
+    }
+
+    // Formatear automáticamente la fecha de expiración a MM/YY
+    function formatExpirationDate(event) {
+        const input = event.target;
+        let value = input.value.replace(/\D/g, ''); // Remover caracteres no numéricos
+
+        if (value.length > 4) {
+            value = value.slice(0, 4); // Limitar a 4 dígitos
+        }
+
+        if (value.length > 2) {
+            input.value = `${value.slice(0, 2)}/${value.slice(2)}`;
+        } else {
+            input.value = value;
+        }
+    }
+
+    // Validación para no permitir más de la longitud máxima
+    function enforceMaxLength(event, maxLength) {
+        const input = event.target;
+        if (input.value.length >= maxLength && event.key !== 'Backspace' && event.key !== 'Tab') {
+            event.preventDefault();
+        }
+    }
+
+    // Limpiar los campos del formulario
+    function clearFormFields() {
+        cardNumberInput.value = '';
+        expireDateInput.value = '';
+        cvvInput.value = '';
+    }
+
+ 
+    cardNumberInput.addEventListener('keypress', allowOnlyNumbers);
+    cardNumberInput.addEventListener('input', (event) => enforceMaxLength(event, 16));
+
+    expireDateInput.addEventListener('keypress', allowOnlyNumbers);
+    expireDateInput.addEventListener('input', formatExpirationDate);
+
+    cvvInput.addEventListener('keypress', allowOnlyNumbers);
+    cvvInput.addEventListener('input', (event) => enforceMaxLength(event, 3));
+
+    cardForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        
+        clearFormFields();
+    });
+});
+

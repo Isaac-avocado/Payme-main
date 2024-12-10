@@ -1,23 +1,31 @@
 document.addEventListener('DOMContentLoaded', async function() {
     const transactionsContainer = document.getElementById('transactions-container');
     const transactionsPlaceholder = document.getElementById('transactions-placeholder');
+    const datePicker = document.getElementById('date-picker'); // Elemento de la fecha
 
     if (transactionsContainer && transactionsPlaceholder) {
         console.log('Containers found, fetching transactions...');
 
-        async function fetchTransactions() {
-            const token = localStorage.getItem('token');
-            console.log('Fetching transactions with token:', token);
+        // Función para obtener los datos de la API
+        async function fetchData(apiEndpoint) {
+            const token = localStorage.getItem('token'); // Obtener el token JWT del localStorage
+            console.log('Fetching data with token:', token);
 
-            const response = await fetch('http://localhost:3000/api/transactions/getUserTransactions', {
+            const date = datePicker.value; // Obtener el valor de la fecha del input
+
+            // Agregar la fecha a los parámetros de la URL
+            const url = `${apiEndpoint}?date=${date}`;
+
+            const response = await fetch(url, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': token
                 },
                 credentials: 'include'
             });
 
+            console.log('API response status:', response.status);
             if (!response.ok) {
-                console.error('Failed to fetch transactions, status:', response.status);
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
             return await response.json();
         }
@@ -34,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             const userId = decodedToken.userId;
             console.log('Decoded userId from token:', userId);
 
-            const transactions = await fetchTransactions();
+            const transactions = await fetchData('http://localhost:3000/api/transactions/getUserTransactions');
             console.log('Transactions fetched:', transactions);
 
             if (transactions.length > 0) {
@@ -43,11 +51,21 @@ document.addEventListener('DOMContentLoaded', async function() {
                     const transactionElement = document.createElement('div');
                     transactionElement.className = 'transaction';
                     console.log('Appending transaction:', transaction);
-                    transactionElement.innerHTML = `
-                        <span class="transaction-icon">${transaction.user_id === userId ? '➖' : '➕'}</span>
+
+                    // Asegurarse de que transaction.amount es un número
+                    const amount = parseFloat(transaction.amount);
+                    if (isNaN(amount)) {
+                        console.error('Transaction amount is not a number:', transaction.amount);
+                        return;
+                    }
+
+                    const transactionIcon = transaction.type === 'income' ? '➕' : '➖';
+
+                    transactionElement.innerHTML = ` 
+                        <span class="transaction-icon">${transactionIcon}</span>
                         <div class="transaction-details">
-                            <p class="small-label">${transaction.user_id === userId ? 'To' : 'From'}</p>
-                            <p class="large-label">${transaction.description}</p>
+                            <p class="small-label">Type</p>
+                            <p class="large-label">${transaction.type}</p>
                         </div>
                         <div class="status">
                             <div class="status-circle ${transaction.user_id === userId ? 'red' : 'green'}"></div>
@@ -58,7 +76,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                             <p class="small-label">Transaction ID</p>
                         </div>
                         <div class="amount-info">
-                            <p class="large-label">$${transaction.amount.toFixed(2)}</p>
+                            <p class="large-label">$${amount.toFixed(2)}</p>
                             <p class="small-label">${formatDate(transaction.created_at)}</p>
                         </div>
                     `;
